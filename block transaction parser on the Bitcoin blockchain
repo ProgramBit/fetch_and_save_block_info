@@ -1,0 +1,32 @@
+import requests
+
+def get_block_transactions(block_height, api_key):
+    base_url = "https://api.blockchair.com/bitcoin/"
+    endpoint = f"dashboards/block/{block_height}"
+
+    params = {
+        "key": api_key,  # Замените на свой API-ключ
+        "limit": 10,  # Установите желаемый лимит транзакций
+    }
+
+    try:
+        response = requests.get(f"{base_url}{endpoint}", params=params)
+        response.raise_for_status()
+        data = response.json()
+
+        # Обработка данных о транзакциях
+        transactions = data.get("data", {}).get("transactions", [])
+        for transaction in transactions:
+            tx_hash = transaction.get("hash", "N/A")
+            print(f"Transaction Hash: {tx_hash}")
+
+            # Добавьте дополнительную обработку данных по желанию
+
+    except requests.exceptions.RequestException as e:
+        print(f"Error during API request: {e}")
+
+if __name__ == "__main__":
+    block_height = 123456  # Укажите номер блока, который вы хотите проанализировать
+    api_key = "your_api_key"  # Замените на свой API-ключ
+
+    get_block_transactions(block_height, api_key)
