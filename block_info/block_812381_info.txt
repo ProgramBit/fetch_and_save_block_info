@@ -1,0 +1,2 @@
+Block Height: 812381, Block Hash: 00000000000000000002dbb95d77bfbedfb0b5c673269bf5e7b265207ac5d2a5
+
